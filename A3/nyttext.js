@@ -40,6 +40,8 @@ var hitwords = [
   "it",
   "all",
   "here",
+  "as",
+  "just",
 ];
 
 function preload() {
@@ -63,16 +65,20 @@ function setup() {
 
 function draw() {
   background(0);
-  fill(255);
-  text("Topics of Interest", 0, 0);
+  translate(40, 40);
+  var rowLevel = 1.5;
 
-  var lineheight = 24;
-  var margin = 40;
-  translate(margin, margin);
+  fill(255, 255, 255, 220);
+  textSize(20);
+  text("The Important Things: capitalized words from NYT's top story abstracts", 0, 0);
+
+  textSize(14);
+  fill(250, 70, 130, 220);
 
   for (var i = 0; i < headlines.length; i++) {
     var words = split(headlines[i], ' ');
     var nextX = 0;
+    hitWordFound = false;
 
     for (var j = 0; j < words.length; j++) {
       var firstChar = words[j].charAt(0);
@@ -80,9 +86,13 @@ function draw() {
       var cleanWord = lowerWord.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
       if (firstChar == firstChar.toUpperCase() && isNaN(lowerWord) && firstChar !== '$') {
         if (!hitwords.includes(cleanWord)) {
-          text(cleanWord +' ', nextX, i*lineheight);
-          nextX += textWidth(words[j]+' ');
+          text(cleanWord + ' / ', nextX, rowLevel*24);
+          nextX += textWidth(cleanWord + ' / ');
+          hitWordFound = true;
         }
+      }
+      if (j === words.length - 1 && hitWordFound) {
+        rowLevel++;
       }
     }
   }
