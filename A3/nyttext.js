@@ -42,6 +42,11 @@ var hitwords = [
   "here",
   "as",
   "just",
+  "if",
+  "then",
+  "now",
+  "theyre",
+  "they",
 ];
 
 function preload() {
@@ -86,8 +91,8 @@ function draw() {
       var cleanWord = lowerWord.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
       if (firstChar == firstChar.toUpperCase() && isNaN(lowerWord) && firstChar !== '$') {
         if (!hitwords.includes(cleanWord)) {
-          text(cleanWord + ' / ', nextX, rowLevel*24);
-          nextX += textWidth(cleanWord + ' / ');
+          text(cleanWord.toUpperCase() + ' / ', nextX, rowLevel*24);
+          nextX += textWidth(cleanWord.toUpperCase() + ' / ');
           hitWordFound = true;
         }
       }
