@@ -33,15 +33,12 @@ function draw() {
     var nextX = 0;
 
     for (var j = 0; j < words.length; j++) {
-      var firstChar = words[j].charAt(0);
-      var lowerWord = words[j].toLowerCase();
-      var cleanWord = lowerWord.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
-      if (cleanWord == 'trump' || cleanWord == 'trumps') {
-        fill("yellow");
-      } else {
+      if (words[j].toLowerCase().indexOf('trump') === -1) {
         fill(255);
+      } else {
+        fill("yellow");
       }
-      text(cleanWord +' ', nextX, i*lineheight);
+      text(words[j] +' ', nextX, i*lineheight);
       nextX += textWidth(words[j]+' ');
     }
   }
