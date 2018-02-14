@@ -1,52 +1,52 @@
 var headlines = [];
 var hitwords = [
-  "and",
-  "or",
-  "the",
-  "on",
-  "a",
-  "an",
-  "in",
-  "into",
-  "of",
-  "for",
-  "from",
-  "what",
-  "at",
-  "he",
-  "she",
-  "how",
-  "i",
-  "we",
-  "while",
-  "many",
-  "$",
-  "but",
-  "heres",
-  "its",
-  "so",
-  "there",
-  "his",
-  "her",
-  "like",
-  "this",
-  "that",
-  "more",
-  "is",
-  "yes",
-  "no",
-  "thats",
-  "why",
-  "it",
-  "all",
-  "here",
-  "as",
-  "just",
-  "if",
-  "then",
-  "now",
-  "theyre",
-  "they",
+  "AND",
+  "OR",
+  "THE",
+  "ON",
+  "A",
+  "AN",
+  "IN",
+  "INTO",
+  "OF",
+  "FOR",
+  "FROM",
+  "WHAT",
+  "AT",
+  "HE",
+  "SHE",
+  "HOW",
+  "I",
+  "WE",
+  "WHILE",
+  "MANY",
+  "BUT",
+  "HERES",
+  "ITS",
+  "SO",
+  "THERE",
+  "HIS",
+  "HER",
+  "LIKE",
+  "THIS",
+  "THAT",
+  "MORE",
+  "IS",
+  "YES",
+  "NO",
+  "THATS",
+  "WHY",
+  "IT",
+  "ALL",
+  "HERE",
+  "AS",
+  "JUST",
+  "IF",
+  "THEN",
+  "NOW",
+  "THEYRE",
+  "THEY",
+  "A",
 ];
 
 function preload() {
@@ -87,12 +87,12 @@ function draw() {
 
     for (var j = 0; j < words.length; j++) {
       var firstChar = words[j].charAt(0);
-      var lowerWord = words[j].toLowerCase();
-      var cleanWord = lowerWord.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
-      if (firstChar == firstChar.toUpperCase() && isNaN(lowerWord) && firstChar !== '$') {
+      var upperWord = words[j].toUpperCase();
+      var cleanWord = upperWord.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
+      if (firstChar == firstChar.toUpperCase() && isNaN(cleanWord) && firstChar !== '$') {
         if (!hitwords.includes(cleanWord)) {
-          text(cleanWord.toUpperCase() + ' / ', nextX, rowLevel*24);
-          nextX += textWidth(cleanWord.toUpperCase() + ' / ');
+          text(cleanWord + ' / ', nextX, rowLevel*24);
+          nextX += textWidth(cleanWord + ' / ');
           hitWordFound = true;
         }
       }
