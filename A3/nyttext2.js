@@ -26,10 +26,11 @@ function draw() {
   textSize(20);
   fill(255);
   text("Political Colors: highlighting U.S. politics keywords in NYT's top story abstracts", 0, 0);
-  fill(230, 230, 230, 240);
-  textSize(14);
 
+  textSize(14);
   text("(Trump administration in yellow, Republicans in red, Democrats in blue)", 0, 24);
+
+  fill(230, 230, 230, 240);
 
   for (var i = 0; i < headlines.length; i++) {
     var words = split(headlines[i], ' ');
@@ -45,7 +46,7 @@ function draw() {
       } else if (words[j].toLowerCase().indexOf('democrat') !== -1) {
         fill(130, 177, 255, 240);
       } else {
-        fill(255, 255, 255, 240);
+        fill(230, 230, 230, 240);
       }
       text(words[j] +' ', nextX, (i+2.5)*24);
       nextX += textWidth(words[j]+' ');
