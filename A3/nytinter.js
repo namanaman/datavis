@@ -1,4 +1,6 @@
 var headlines = [];
+var topics = [];
+var chosen_headlines = [];
 var hitwords = [
   "AND",
   "OR",
@@ -54,6 +56,7 @@ var hitwords = [
   "WITH",
   "TO",
 ];
+var maxHeadLen, minHeadLen;
 
 function preload() {
   var url = "https://api.nytimes.com/svc/topstories/v2/home.json";
@@ -65,24 +68,27 @@ function preload() {
 function setup() {
   createCanvas(1000, 1500);
   background(0);
-
-  textSize(14);
+  frameRate(30);
   textAlign(LEFT);
-
-  noLoop(); // since we're not animating, one frame is sufficient: run draw() just once
 
   extractHeadlines();
 }
 
 function draw() {
   background(0);
-  translate(40, 40);
-  var rowLevel = 1.5;
 
-  fill(255, 255, 255, 220);
+  var lineheight = 24;
+  var margin = 40;
+  var rowLevel = 2;
+
+  translate(margin, margin);
+
+  // Title text
   textSize(20);
+  fill(255, 255, 255, 220);
   text("The Important Things: capitalized words from NYT's top story abstracts", 0, 0);
 
+  // Content text
   textSize(14);
   fill(250, 70, 130, 220);
 
@@ -97,21 +103,34 @@ function draw() {
       var cleanWord = upperWord.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
       if (firstChar == firstChar.toUpperCase() && isNaN(cleanWord) && firstChar !== '$') {
         if (!hitwords.includes(cleanWord)) {
-          text(cleanWord + ' / ', nextX, rowLevel*24);
+          text(cleanWord + ' / ', nextX, rowLevel*lineheight);
           nextX += textWidth(cleanWord + ' / ');
           hitWordFound = true;
         }
       }
       if (j === words.length - 1 && hitWordFound) {
         rowLevel++;
+        append(chosen_headlines, [headlines[i], topics[i]]);
       }
+    }
+  }
+
+  for (var i = 0; i < (rowLevel-2); i++) {
+    if (mouseX > margin && mouseX < margin+600 && mouseY < margin+(i+2)*lineheight && mouseY > margin+(i+2)*lineheight+(-1*lineheight)) {
+      fill(50, 50, 50, 250);
+      rect(mouseX, mouseY, 400, 50);
+      fill(255);
+      textSize(10);
+      text("HEADLINE: " + chosen_headlines[i][0] + " // RELEVANT TOPICS: " + chosen_headlines[i][1], mouseX+10, mouseY+10, 400-20, 200-20); // 10px label padding
     }
   }
 }
 
 function extractHeadlines() {
   for (var i = 0; i < nytResponse.results.length; i++) {
-    var h = nytResponse.results[i].abstract; // title, byline, section
+    var h = nytResponse.results[i].abstract;
+    var t = nytResponse.results[i].des_facet.join(', ');
     append(headlines, h);
+    append(topics, t);
   }
 }
