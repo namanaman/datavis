@@ -55,6 +55,8 @@ var hitwords = [
   "YOU",
   "WITH",
   "TO",
+  "MR",
+  "DR",
 ];
 var maxHeadLen, minHeadLen;
 
@@ -121,7 +123,7 @@ function draw() {
       rect(mouseX, mouseY, 400, 50);
       fill(255);
       textSize(10);
-      text("HEADLINE: " + chosen_headlines[i][0] + " // RELEVANT TOPICS: " + chosen_headlines[i][1], mouseX+10, mouseY+10, 400-20, 200-20); // 10px label padding
+      text("FULL STORY ABSTRACT: " + chosen_headlines[i][0] + " // RELEVANT TOPICS: " + chosen_headlines[i][1], mouseX+10, mouseY+10, 400-20, 200-20); // 10px label padding
     }
   }
 }
