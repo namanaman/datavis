@@ -1,0 +1,65 @@
+Ethnicity,Leading Cause,Status
+Asian,Heart Disease,top3
+Asian,Cancer,top3
+Asian,Flu Pneumonia,top3
+Asian,Homicide,none
+Asian,Diabetes,top10
+Asian,Stroke,top10
+Asian,Chronic Lower Respiratory,top10
+Asian,Mental Behavioral Disorders,none
+Asian,HIV,none
+Asian,Accidents,top10
+Asian,Hypertension Renal Disease,top10
+Asian,Chronic Liver Cirrhosis,top10
+Asian,Suicide,top10
+Asian,Alzheimer’s,top10
+Asian,Nephritis,top10
+Asian,Septicemia,none
+Black,Heart Disease,top3
+Black,Cancer,top3
+Black,Flu Pneumonia,top10
+Black,Homicide,top10
+Black,Diabetes,top3
+Black,Stroke,top10
+Black,Chronic Lower Respiratory,top10
+Black,Mental Behavioral Disorders,none
+Black,HIV,top10
+Black,Accidents,top10
+Black,Hypertension Renal Disease,top10
+Black,Chronic Liver Cirrhosis,none
+Black,Suicide,none
+Black,Alzheimer’s,top10
+Black,Nephritis,top10
+Black,Septicemia,none
+Hispanic,Heart Disease,top3
+Hispanic,Cancer,top3
+Hispanic,Flu Pneumonia,top3
+Hispanic,Homicide,none
+Hispanic,Diabetes,top10
+Hispanic,Stroke,top10
+Hispanic,Chronic Lower Respiratory,top10
+Hispanic,Mental Behavioral Disorders,top10
+Hispanic,HIV,top10
+Hispanic,Accidents,top10
+Hispanic,Hypertension Renal Disease,top10
+Hispanic,Chronic Liver Cirrhosis,top10
+Hispanic,Suicide,none
+Hispanic,Alzheimer’s,top10
+Hispanic,Nephritis,none
+Hispanic,Septicemia,none
+White,Heart Disease,top3
+White,Cancer,top3
+White,Flu Pneumonia,top3
+White,Homicide,none
+White,Diabetes,top10
+White,Stroke,top10
+White,Chronic Lower Respiratory,top10
+White,Mental Behavioral Disorders,top10
+White,HIV,none
+White,Accidents,top10
+White,Hypertension Renal Disease,top10
+White,Chronic Liver Cirrhosis,none
+White,Suicide,top10
+White,Alzheimer’s,top10
+White,Nephritis,none
+White,Septicemia,top10
