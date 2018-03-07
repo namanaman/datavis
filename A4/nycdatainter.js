@@ -6,7 +6,7 @@ var ethnicityTable;
 
 var state = 0; 
 var button;
-var buttonText = "View data by ethnicity";
+var buttonText = "Explore by ethnicity";
 
 function preload(){
   table = loadTable('2014_data_pivot.csv', 'csv', 'header');
@@ -91,5 +91,5 @@ function draw(){
 
 function toggleState() {
   state = (state == 0) ? 1 : 0;
-  button.elt.textContent = (state == 0) ? "View data by ethnicity" : "View data by death rate";
+  button.elt.textContent = (state == 0) ? "Explore by ethnicity" : "Explore by death rate";
 }
