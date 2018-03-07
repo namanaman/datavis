@@ -76,16 +76,34 @@ function draw(){
       rect(startX+45*xCounter, startY+45*yCounter, 40, 40);
       xCounter++;
     }
+
+    push();
+    // Legend
+    textSize(14);
+    fill(210, 80, 150);
+    rect(30, 40, 30, 30);
+    fill(255, 255, 255);
+    text("Top 10 Cause", 65, 60);
+
+    fill(190, 30, 70);
+    rect(170, 40, 30, 30);
+    fill(255, 255, 255);
+    text("Top 3 Cause", 205, 60);
+
+    textSize(18);
+    // Rows of grid: ethnicity
     fill(255, 255, 255);
     text("Asian",25,120);
     text("Black",25,165);
     text("White",25,210);
     text("Hispanic",5,255);
 
+    // Columns of grid: leading causes
     rotate(PI / 2.0);
     for (var i = 0; i < leadingCauses.length; i++) {
       text(leadingCauses[i], 280, -100-(i*45));
     }
+    pop();
   }
 }
 
