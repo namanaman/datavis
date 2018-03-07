@@ -95,8 +95,8 @@ function draw(){
     fill(255, 255, 255);
     text("Asian",25,120);
     text("Black",25,165);
-    text("White",25,210);
-    text("Hispanic",5,255);
+    text("Hispanic",25,210);
+    text("White",5,255);
 
     // Columns of grid: leading causes
     rotate(PI / 2.0);
