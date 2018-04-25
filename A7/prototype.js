@@ -42,14 +42,56 @@ function loadData() {
 }
 
 function draw(){
-  console.log("Hi");
   background(255, 255, 255);
+
+  // adds israel aid points
+  fill(68,138,255);
+  var prev_x = 0;
+  var prev_y = 0;
+  for (var i = 0; i < israel_aid_years.length; i++) {
+    if (israel_aid_categories[i] === "Total") {
+      var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
+      var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300);
+      push();
+      noStroke();
+      ellipse(current_x, current_y, 5, 5);
+      if (prev_x > 0 && prev_y > 0) {
+        noStroke();
+        line(prev_x, prev_y, current_x, current_y);
+        quad(prev_x, 500, prev_x, prev_y, current_x, current_y, current_x, 500);
+      }
+      pop();
+      prev_x = current_x;
+      prev_y = current_y;
+    }
+    // if (israel_aid_categories[i] === "Economic") {
+    //   var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
+    //   var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300); // change max
+    //   ellipse(current_x, current_y, 5, 5);
+    //   if (prev_x > 0 && prev_y > 0) {
+    //     line(prev_x, prev_y, current_x, current_y);
+    //   }
+    //   prev_x = current_x;
+    //   prev_y = current_y;
+    // }
+    // if (israel_aid_categories[i] === "Military") {
+    //   var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
+    //   var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300); // change max
+    //   ellipse(current_x, current_y, 5, 5);
+    //   if (prev_x > 0 && prev_y > 0) {
+    //     line(prev_x, prev_y, current_x, current_y);
+    //   }
+    //   prev_x = current_x;
+    //   prev_y = current_y;
+    // }   
+  }
+  
   fill(0, 102, 153);
   textSize(25);
-  text("The Arab-Israeli Conflict, in a timeline", 20,20);
+  text("A history of U.S. involvement in the Arab-Israeli conflict", 20,20);
 
   line(75, 500, 2075, 500); // horizontal line for timeline axis
-  line(75, 200, 75, 800); // vertical line for aid axis
+  line(75, 200, 75, 500); // vertical line for aid axis
 
   // adds ticks, year labels to timeline
   textSize(12);
@@ -62,14 +104,13 @@ function draw(){
     x_pos = x_pos + 100;
   }
 
-  console.log("hey heyyyy");
   // adds event bubbles, descriptions on hover
   fill(233,30,99);
   for (var i = 0; i < general_timeline_years.length; i++) {
     var x_loc = map(general_timeline_years[i], 1915, 2015, 75, 2075);
-    ellipse(x_loc, 500, 10, 10);
+    ellipse(x_loc, 500, 17, 17);
 
-    if (mouseInBounds(x_loc-8, 492, x_loc+8, 508)) {
+    if (mouseInBounds(x_loc-12, 492, x_loc+10, 508)) {
       textSize(15);
       textStyle(BOLD);
       text("What happened in " + Math.round(general_timeline_years[i]) + ":", 20, 60); 
@@ -79,31 +120,7 @@ function draw(){
       text(general_timeline_events[i], 20, 65, 400, 160);
     }
   }
-
-  // adds israel aid points
-  fill(41,98,255);
-  for (var i = 0; i < israel_aid_years.length; i++) {
-    if (israel_aid_categories[i] === "Total") {
-      var x_loc = map(israel_aid_years[i], 1915, 2015, 75, 2075);
-      var y_offset = map(israel_aid_amounts[i], 0, 4790100000, 0, 300);
-      ellipse(x_loc, 500-y_offset, 10, 10);
-
-      // if (mouseInBounds(x_loc-8, 492-y_offset, x_loc+8, 508-y_offset)) {
-      //   var angle_data = [israel_aid_amounts[i-2], israel_aid_amounts[i-1]];
-      //   var lastAngle = 0;
-      //   for (var j = 0; j < angle_data.length; j++) {
-      //     if (j === 1) {
-      //       fill(245, 0, 87); // military color
-      //     } else {
-      //       fill(0, 230, 118); // economic color
-      //     }
-      //     var data_angle = map(angle_data[j], 0, 4790100000, 0, 360);
-      //     arc(500, 100, 250, 250, lastAngle, lastAngle+radians(data_angle));
-      //     lastAngle += radians(data_angle);
-      //   }     
-      // }
-    }
-  }
+}
 
 function mouseInBounds(x1, y1, x2, y2) {
   return (mouseX > x1 && mouseX < x2 && mouseY > y1 && mouseY < y2);
