@@ -25,10 +25,12 @@ var palestine_aid_amounts;
 function preload(){
   general_timeline_data = loadTable('general_timeline.csv', 'csv', 'header');
   israel_aid_data = loadTable('israel_aid.csv', 'csv', 'header');
+  palestine_aid_data = loadTable('palestine_aid.csv', 'csv', 'header');
+  usa_timeline_data = loadTable('usa_timeline.csv', 'csv', 'header');
 }
 
 function setup() {
-  createCanvas(2150, 1000);
+  createCanvas(2300, 1000);
   loadData();
 }
 
@@ -39,59 +41,137 @@ function loadData() {
   israel_aid_years = israel_aid_data.getColumn("fiscal_year");
   israel_aid_categories = israel_aid_data.getColumn("category");
   israel_aid_amounts = israel_aid_data.getColumn("current_amount");
+
+  palestine_aid_years = palestine_aid_data.getColumn("fiscal_year");
+  palestine_aid_categories = palestine_aid_data.getColumn("category");
+  palestine_aid_amounts = palestine_aid_data.getColumn("current_amount");
+
+  usa_timeline_years = usa_timeline_data.getColumn("Date");
+  usa_timeline_events = usa_timeline_data.getColumn("Description");
 }
 
 function draw(){
   background(255, 255, 255);
 
   // adds israel aid points
-  fill(68,138,255);
-  var prev_x = 0;
-  var prev_y = 0;
+  var prev_x_econ = 0;
+  var prev_y_econ = 0;
+  var prev_x_milit = 0;
+  var prev_y_milit = 0;
+  var prev_prev_y_econ = 0;
   for (var i = 0; i < israel_aid_years.length; i++) {
-    if (israel_aid_categories[i] === "Total") {
+    if (israel_aid_categories[i] === "Economic") {
+      fill(205,220,57); // economic color - green
       var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
       var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300);
       push();
       noStroke();
       ellipse(current_x, current_y, 5, 5);
-      if (prev_x > 0 && prev_y > 0) {
+      if (prev_x_econ > 0 && prev_y_econ > 0) {
         noStroke();
-        line(prev_x, prev_y, current_x, current_y);
-        quad(prev_x, 500, prev_x, prev_y, current_x, current_y, current_x, 500);
+        line(prev_x_econ, prev_y_econ, current_x, current_y);
+        quad(prev_x_econ, 500, prev_x_econ, prev_y_econ, current_x, current_y, current_x, 500);
       }
       pop();
-      prev_x = current_x;
-      prev_y = current_y;
+      prev_x_econ = current_x;
+      prev_prev_y_econ = prev_y_econ;
+      prev_y_econ = current_y;
     }
-    // if (israel_aid_categories[i] === "Economic") {
-    //   var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
-    //   var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300); // change max
-    //   ellipse(current_x, current_y, 5, 5);
-    //   if (prev_x > 0 && prev_y > 0) {
-    //     line(prev_x, prev_y, current_x, current_y);
-    //   }
-    //   prev_x = current_x;
-    //   prev_y = current_y;
-    // }
-    // if (israel_aid_categories[i] === "Military") {
-    //   var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
-    //   var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300); // change max
-    //   ellipse(current_x, current_y, 5, 5);
-    //   if (prev_x > 0 && prev_y > 0) {
-    //     line(prev_x, prev_y, current_x, current_y);
-    //   }
-    //   prev_x = current_x;
-    //   prev_y = current_y;
-    // }   
+    if (israel_aid_categories[i] === "Total" && i > 23) { // Not stacking when military is 0
+      fill(244,67,54); // military color - red
+      var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
+      var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300);
+      push();
+      noStroke();
+      ellipse(current_x, current_y, 5, 5);
+      if (prev_x_milit > 0 && prev_y_milit > 0) {
+        noStroke();
+        line(prev_x_milit, prev_y_milit, current_x, current_y);
+        quad(prev_x_milit, prev_y_milit, current_x, current_y, current_x, prev_y_econ, prev_x_milit, prev_prev_y_econ);
+      }
+      pop();
+      prev_x_milit = current_x;
+      prev_y_milit = current_y;
+    }
+  }
+
+  // adds palestine aid points
+  prev_x_econ = 0;
+  prev_y_econ = 0;
+  prev_x_milit = 0;
+  prev_y_milit = 0;
+  prev_prev_y_econ = 0;
+  for (var i = 0; i < palestine_aid_years.length; i++) {
+    if (palestine_aid_categories[i] === "Economic") {
+      fill(205,220,57); // economic color - green
+      var current_x = map(palestine_aid_years[i], 1915, 2015, 75, 2075);
+      var current_y = 500 + map(palestine_aid_amounts[i], 0, 4790100000, 0, 300);
+      push();
+      noStroke();
+      ellipse(current_x, current_y, 5, 5);
+      if (prev_x_econ > 0 && prev_y_econ > 0) {
+        noStroke();
+        line(prev_x_econ, prev_y_econ, current_x, current_y);
+        quad(prev_x_econ, 500, prev_x_econ, prev_y_econ, current_x, current_y, current_x, 500);
+      }
+      pop();
+      prev_x_econ = current_x;
+      prev_prev_y_econ = prev_y_econ;
+      prev_y_econ = current_y;
+    }
+    if (palestine_aid_categories[i] === "Total" && i > 69) { // Not stacking when military is 0
+      fill(244,67,54); // military color - red
+      var current_x = map(palestine_aid_years[i], 1915, 2015, 75, 2075);
+      var current_y = 500 + map(palestine_aid_amounts[i], 0, 4790100000, 0, 300);
+      push();
+      noStroke();
+      ellipse(current_x, current_y, 5, 5);
+      if (prev_x_milit > 0 && prev_y_milit > 0) {
+        noStroke();
+        line(prev_x_milit, prev_y_milit, current_x, current_y);
+        quad(prev_x_milit, prev_y_milit, current_x, current_y, current_x, prev_y_econ, prev_x_milit, prev_prev_y_econ);
+      }
+      pop();
+      prev_x_milit = current_x;
+      prev_y_milit = current_y;
+    }
   }
   
-  fill(0, 102, 153);
+  fill(49,27,146);
   textSize(25);
-  text("A history of U.S. involvement in the Arab-Israeli conflict", 20,20);
+  text("A history of U.S. involvement in the Arab-Israeli conflict", 20, 30);
+
+  push();
+  noStroke();
+
+  ellipse(700, 11, 20, 20);
+  textSize(13);
+  text("Historical event", 660, 36);
+
+  fill(33,150,243);
+  ellipse(810, 11, 13, 13);
+  text("U.S. involvement", 760, 36);
+
+  fill(205,220,57);
+  rect(895, 0, 20, 20);
+  text("Economic aid", 870, 36);
+
+  fill(244,67,54);
+  rect(980, 0, 20, 20);
+  text("Military aid", 960, 36);
+
+  pop();
 
   line(75, 500, 2075, 500); // horizontal line for timeline axis
   line(75, 200, 75, 800); // vertical line for aid axis
+
+  // extra lines
+  push();
+  stroke(189,189,189);
+  line(2075, 200, 2075, 800);
+  line(75, 200, 2075, 200);
+  line(75, 800, 2075, 800);
+  pop();
 
   // adds ticks, year labels to timeline
   textSize(12);
@@ -105,21 +185,55 @@ function draw(){
   }
 
   // adds event bubbles, descriptions on hover
-  fill(233,30,99);
   for (var i = 0; i < general_timeline_years.length; i++) {
     var x_loc = map(general_timeline_years[i], 1915, 2015, 75, 2075);
-    ellipse(x_loc, 500, 17, 17);
+    ellipse(x_loc, 500, 20, 20);
 
-    if (mouseInBounds(x_loc-12, 492, x_loc+10, 508)) {
+    if (mouseInBounds(x_loc-11, 489, x_loc+11, 511)) {
       textSize(15);
       textStyle(BOLD);
-      text("What happened in " + Math.round(general_timeline_years[i]) + ":", 20, 60); 
+      text("What happened in " + Math.round(general_timeline_years[i]) + ":", x_loc-80, 60); 
 
       textStyle(NORMAL);
       textSize(12);
-      text(general_timeline_events[i], 20, 65, 400, 160);
+      text(general_timeline_events[i], x_loc-80, 65, 350, 100);
     }
   }
+
+  // adds event bubbles, descriptions on hover
+  fill(33,150,243);
+  for (var i = 0; i < usa_timeline_years.length; i++) {
+    var x_loc = map(usa_timeline_years[i], 1915, 2015, 75, 2075);
+    ellipse(x_loc, 500, 13, 13);
+
+    if (mouseInBounds(x_loc-8, 492, x_loc+8, 508)) {
+      textSize(15);
+      textStyle(BOLD);
+      text("U.S. involvement in " + Math.round(usa_timeline_years[i]) + ":", x_loc-80, 170); 
+
+      textStyle(NORMAL);
+      textSize(12);
+      text(usa_timeline_events[i], x_loc-80, 176, 350, 100);
+    }
+  }
+
+  fill(49,27,146);
+  textStyle(BOLD);
+  text("Sources", 20, 900);
+  textStyle(NORMAL);
+  text("The general timeline events taken from the following article by The Guardian: https://www.theguardian.com/world/gallery/2009/aug/17/israel-middleeast", 20, 920);
+  text("The U.S. involvement timeline events taken from the following article by Reuters: https://www.reuters.com/article/us-palestinians-israel-usa-timeline/timeline-u-s-israeli-relations-since-1948-idUSTRE62E45Z20100315", 20, 940);
+  text("Aid data on Palestine and Israel taken from the Foreign Aid Explorer powered by USAID Economic Analysis and Data Services.", 20, 960);
+
+  text("$0", 50, 505);
+  text("$5b", 50, 200);
+  text("$5b", 50, 805);
+  push();
+  textSize(17);
+  rotate(HALF_PI);
+  text("U.S. aid to Israel", 250, -45);
+  text("U.S. aid to Palestine", 520, -45);
+  pop();
 }
 
 function mouseInBounds(x1, y1, x2, y2) {
