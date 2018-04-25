@@ -91,7 +91,7 @@ function draw(){
   text("A history of U.S. involvement in the Arab-Israeli conflict", 20,20);
 
   line(75, 500, 2075, 500); // horizontal line for timeline axis
-  line(75, 200, 75, 500); // vertical line for aid axis
+  line(75, 200, 75, 800); // vertical line for aid axis
 
   // adds ticks, year labels to timeline
   textSize(12);
