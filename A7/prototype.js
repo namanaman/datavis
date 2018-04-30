@@ -61,12 +61,12 @@ function draw(){
   var prev_prev_y_econ = 0;
   for (var i = 0; i < israel_aid_years.length; i++) {
     if (israel_aid_categories[i] === "Economic") {
-      fill(205,220,57); // economic color - green
       var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
       var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300);
       push();
       noStroke();
-      ellipse(current_x, current_y, 5, 5);
+      ellipse(current_x, current_y, 7, 7);
+      fill(205,220,57); // economic color - green
       if (prev_x_econ > 0 && prev_y_econ > 0) {
         noStroke();
         line(prev_x_econ, prev_y_econ, current_x, current_y);
@@ -78,16 +78,24 @@ function draw(){
       prev_y_econ = current_y;
     }
     if (israel_aid_categories[i] === "Total" && i > 23) { // Not stacking when military is 0
-      fill(244,67,54); // military color - red
       var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
       var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300);
       push();
       noStroke();
-      ellipse(current_x, current_y, 5, 5);
+      fill(244,67,54); // military color - red
       if (prev_x_milit > 0 && prev_y_milit > 0) {
         noStroke();
         line(prev_x_milit, prev_y_milit, current_x, current_y);
         quad(prev_x_milit, prev_y_milit, current_x, current_y, current_x, prev_y_econ, prev_x_milit, prev_prev_y_econ);
+      }
+      fill(49,27,146);
+      ellipse(current_x, current_y, 7, 7);
+      if (mouseInBounds(current_x-4, current_y-4, current_x+4, current_y+4)) {
+        stroke(49,27,146);
+        line(current_x, current_y, current_x-80, 588);
+        noStroke();
+        rect(current_x-82, 583, 7, 7);
+        text("Total aid given in " + israel_aid_years[i] + ": $" + israel_aid_amounts[i], current_x-70, 590);
       }
       pop();
       prev_x_milit = current_x;
@@ -108,12 +116,13 @@ function draw(){
       var current_y = 500 + map(palestine_aid_amounts[i], 0, 4790100000, 0, 300);
       push();
       noStroke();
-      ellipse(current_x, current_y, 5, 5);
       if (prev_x_econ > 0 && prev_y_econ > 0) {
         noStroke();
         line(prev_x_econ, prev_y_econ, current_x, current_y);
         quad(prev_x_econ, 500, prev_x_econ, prev_y_econ, current_x, current_y, current_x, 500);
       }
+      fill(49,27,146);
+      ellipse(current_x, current_y, 7, 7);
       pop();
       prev_x_econ = current_x;
       prev_prev_y_econ = prev_y_econ;
@@ -125,12 +134,13 @@ function draw(){
       var current_y = 500 + map(palestine_aid_amounts[i], 0, 4790100000, 0, 300);
       push();
       noStroke();
-      ellipse(current_x, current_y, 5, 5);
       if (prev_x_milit > 0 && prev_y_milit > 0) {
         noStroke();
         line(prev_x_milit, prev_y_milit, current_x, current_y);
         quad(prev_x_milit, prev_y_milit, current_x, current_y, current_x, prev_y_econ, prev_x_milit, prev_prev_y_econ);
       }
+      fill(49,27,146);
+      ellipse(current_x, current_y, 7, 7);
       pop();
       prev_x_milit = current_x;
       prev_y_milit = current_y;
@@ -226,8 +236,8 @@ function draw(){
   text("Aid data on Palestine and Israel taken from the Foreign Aid Explorer powered by USAID Economic Analysis and Data Services.", 20, 960);
 
   text("$0", 50, 505);
-  text("$5b", 50, 200);
-  text("$5b", 50, 805);
+  text("$4.8b", 40, 200);
+  text("$4.8b", 40, 805);
   push();
   textSize(17);
   rotate(HALF_PI);
