@@ -121,13 +121,12 @@ function draw(){
         quad(prev_x_econ, 500, prev_x_econ, prev_y_econ, current_x, current_y, current_x, 500);
       }
       fill(49,27,146);
-      ellipse(current_x, current_y, 7, 7);
       pop();
       prev_x_econ = current_x;
       prev_prev_y_econ = prev_y_econ;
       prev_y_econ = current_y;
     }
-    if (palestine_aid_categories[i] === "Total" && i > 69) { // Not stacking when military is 0
+    if (palestine_aid_categories[i] === "Total") { // Not stacking when military is 0
       fill(244,67,54); // military color - red
       var current_x = map(palestine_aid_years[i], 1915, 2015, 75, 2075);
       var current_y = 500 + map(palestine_aid_amounts[i], 0, 4790100000, 0, 300);
@@ -140,6 +139,13 @@ function draw(){
       }
       fill(49,27,146);
       ellipse(current_x, current_y, 7, 7);
+      if (mouseInBounds(current_x-4, current_y-4, current_x+4, current_y+4)) {
+        stroke(49,27,146);
+        line(current_x, current_y, current_x-80, 588);
+        noStroke();
+        rect(current_x-82, 583, 7, 7);
+        text("Total aid given in " + palestine_aid_years[i] + ": $" + palestine_aid_amounts[i], current_x-70, 590);
+      }
       pop();
       prev_x_milit = current_x;
       prev_y_milit = current_y;
