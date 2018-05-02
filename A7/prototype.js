@@ -65,7 +65,6 @@ function draw(){
       var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300);
       push();
       noStroke();
-      ellipse(current_x, current_y, 7, 7);
       fill(205,220,57); // economic color - green
       if (prev_x_econ > 0 && prev_y_econ > 0) {
         noStroke();
@@ -77,7 +76,7 @@ function draw(){
       prev_prev_y_econ = prev_y_econ;
       prev_y_econ = current_y;
     }
-    if (israel_aid_categories[i] === "Total" && i > 23) { // Not stacking when military is 0
+    if (israel_aid_categories[i] === "Total") { // Not stacking when military is 0
       var current_x = map(israel_aid_years[i], 1915, 2015, 75, 2075);
       var current_y = 500 - map(israel_aid_amounts[i], 0, 4790100000, 0, 300);
       push();
