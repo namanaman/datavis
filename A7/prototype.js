@@ -239,6 +239,8 @@ function draw(){
   text("The general timeline events taken from the following article by The Guardian: https://www.theguardian.com/world/gallery/2009/aug/17/israel-middleeast", 20, 920);
   text("The U.S. involvement timeline events taken from the following article by Reuters: https://www.reuters.com/article/us-palestinians-israel-usa-timeline/timeline-u-s-israeli-relations-since-1948-idUSTRE62E45Z20100315", 20, 940);
   text("Aid data on Palestine and Israel taken from the Foreign Aid Explorer powered by USAID Economic Analysis and Data Services.", 20, 960);
+  text("Hover over points for more information", 110, 430, 150, 100);
+  line(120, 465, 115, 490);
 
   text("$0", 50, 505);
   text("$4.8b", 40, 200);
