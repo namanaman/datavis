@@ -148,9 +148,10 @@ function draw(){
         quad(prev_x_milit, prev_y_milit, current_x, current_y, current_x, prev_y_econ, prev_x_milit, prev_prev_y_econ);
       }
       if (mouseInBounds(current_x-4, current_y-4, current_x+4, current_y+4)) {
-        stroke(66,66,66);
+        stroke(0,0,0);
         line(current_x, current_y, current_x-80, 588);
         noStroke();
+        fill(0,0,0);
         rect(current_x-82, 583, 7, 7);
         text("Total aid given in " + palestine_aid_years[i] + ": $" + palestine_aid_amounts[i], current_x-70, 590);
       }
